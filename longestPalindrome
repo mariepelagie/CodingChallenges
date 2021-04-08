@@ -1,0 +1,33 @@
+## Challenge
+## A palindrome is a sequence of characters that reads the same backwards and forwards. 
+## Given a string, s, find the longest palindromic substring in s.
+
+
+class Solution: 
+    def isPalindrome(self,substring):
+        if len(substring) == 1:
+            return True
+        elif len(substring) > 1 :
+            return (substring[0]== substring[-1]) and self.isPalindrome(substring[1:-1])
+    def longestPalindrome(self, s):
+      # increment through string s
+        if len(s) == 1:
+            return s
+        max_len = 0
+        max_pali = ''
+        for ii in range(len(s)):
+            for jj in range(ii+1,len(s)):
+                substring = s[ii:jj+1]
+                print(substring)
+                if self.isPalindrome(substring):
+                    if len(substring) > max_len:
+                        max_len = len(substring)
+                        max_pali = substring
+        return max_pali      
+              
+      
+        
+# Test program
+s = "racecars"
+print(str(Solution().longestPalindrome(s)))
+# racecar
