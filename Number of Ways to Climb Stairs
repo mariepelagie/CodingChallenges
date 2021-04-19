@@ -1,0 +1,20 @@
+## You are given a positive integer N which represents the number of steps in a staircase. 
+## You can either climb 1 or 2 steps at a time. Write a function that returns the number of unique ways to climb the stairs.
+
+# Method using Recursion
+def staircase(n):
+    # base case: for heights = 1 and height =2
+    if n ==1:
+        return 1
+    elif n ==2:
+        return 2
+    ## Recursive case
+    else:
+        return  staircase(n-1)+ staircase(n-2)
+      
+
+  
+print(staircase(4))
+# 5
+print(staircase(5))
+# 8
