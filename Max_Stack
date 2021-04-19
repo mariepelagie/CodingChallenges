@@ -1,0 +1,95 @@
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
+## Implement a class for a stack that supports all the regular functions (push, pop) and an additional 
+## function of max() which returns the maximum element in the stack (return None if the stack is empty).
+## Each method should run in constant time.
+
+#### VERSION 1 #######
+class MaxStack:
+  def __init__(self):
+    # Fill this in.
+    self.stack = []
+    self.max_val = None
+    self.max_prev = None
+
+  def push(self, val):
+    # Fill this in.
+    if self.stack == []:
+        self.max_val = val
+    else:
+        if self.max_val <= val:
+            self.max_prev = self.max_val
+            self.max_val = val
+            
+    self.stack = [val]+self.stack
+    return 
+
+  def pop(self):
+    # Fill this in.
+    if self.max_val == self.stack[0]:
+       self.max_val = self.max_prev 
+    return self.stack.pop(0)
+
+  def max(self):
+    # Fill this in.
+    if self.stack ==[]:
+        return None
+    else:
+        return self.max_val
+        # max_val = 0
+        # for val in self.stack:
+        #     if val > max_val:
+        #         max_val = val
+        # return max_val
+            
+
+s = MaxStack()
+s.push(1)
+s.push(2)
+s.push(3)
+s.push(2)
+print(s.max())
+# 3
+s.pop()
+s.pop()
+print(s.max())
+# 2
+
+### VERSION 2#######
+class MaxStack:
+  def __init__(self):
+    # Fill this in.
+    self.stack = []
+
+  def push(self, val):
+    # Fill this in.
+    self.stack = [val]+self.stack
+    return 
+
+  def pop(self):
+    # Fill this in.
+    return self.stack.pop(0)
+
+  def max(self):
+    # Fill this in.
+    if self.stack ==[]:
+        return None
+    else:
+        max_val = 0
+        for val in self.stack:
+            if val > max_val:
+                max_val = val
+        return max_val
+            
+
+s = MaxStack()
+s.push(1)
+s.push(2)
+s.push(3)
+s.push(2)
+print(s.max())
+# 3
+s.pop()
+s.pop()
+print(s.max())
+# 2
