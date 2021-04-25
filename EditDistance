@@ -1,0 +1,58 @@
+## Given two strings, determine the edit distance between them. The edit distance is defined as the minimum number of edits (insertion, deletion, or substitution) 
+## needed to change one string to the other.
+
+## Plan
+## --> map s1 and s2  to dictionary with letter frequency. then find difference between letters in s1 and s2. and divide by 2 since 
+## edits can impact both words
+
+## Code 
+import math
+def distance(s1, s2):
+    #create union of all letters
+    all = list(set(s1).union(s2))
+    ## create letter frequency dict for each word
+    s1_d ={}
+    s2_d ={}
+    
+    # map letters to separate frequency dictionary for each word
+    for letter in s1:
+        if letter in s1_d:
+            s1_d[letter]+=1
+        else:
+            s1_d[letter] =1
+    for letter in s2:
+        if letter in s2_d:
+            s2_d[letter]+=1
+        else:
+            s2_d[letter] =1
+    
+    ## add letters from 
+    for letter in all:
+        if letter not in s2_d:
+            s2_d[letter] =0
+        if letter not in s1_d:
+            s1_d[letter] =0
+    # print(s1_d,s2_d)
+    
+    min_edits = 0     
+    for val in s1_d:
+        # print(min_edits)
+        if s1_d[val]>=s2_d[val]:
+            min_edits+= s1_d[val]-s2_d[val]
+        else:
+            min_edits+= s2_d[val]-s1_d[val]
+    ## return half the value rounded up because 1 substitution edit alters both word so difference in letters reflects double. 
+    # insertion and deletion will be reflected once, se we round up for half fractions after division
+    return math.ceil(min_edits/2)
+    
+        
+  
+
+print(distance('biting', 'sitting'))
+# 2
+
+print(distance('sand', 'man'))
+# 2
+
+print(distance('and', 'and'))
+# 0
