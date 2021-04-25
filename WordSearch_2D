@@ -1,0 +1,32 @@
+# You are given a 2D array of characters, and a target string. Return whether or not the word target word exists in the matrix. 
+# Unlike a standard word search, the word must be either going left-to-right, or top-to-bottom in the matrix.
+
+## Plan
+## pick row 1, letter 1 
+#check if word in vertical(left to right
+#or horizontal(top to bottom, move to next left
+# at end of row move down to next row and start again
+# return false if at the bottom
+
+## Code
+def word_search(matrix, word):
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            word_len = len(word)
+            vertical = ''.join([matrix[i][j] for i in range(word_len)])
+            # print(vertical)
+            if (word == ''.join(matrix[i][j:j+word_len])) or (word == vertical):
+                return True
+    return False
+
+## Test
+matrix = [
+  ['F', 'A', 'C', 'I'],
+  ['O', 'B', 'Q', 'P'],
+  ['A', 'N', 'O', 'B'],
+  ['M', 'A', 'S', 'S']]
+
+print(word_search(matrix, 'FOAM'))
+# True
+print(word_search(matrix, 'ABS'))
+# False
