@@ -1,0 +1,28 @@
+# Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+#You must do this in-place without making a copy of the array.Minimize the total number of operations.
+
+class Solution:
+    def moveZeros(self, nums):
+        # define counter. track non zero terms position 
+        counter = 0
+        for num in nums:
+        # check is item in array>0
+            if num > 0:
+                # set non-zero item to counter position in array
+                nums[counter]= num
+                counter+=1
+        ## add zeros at tail of array until len(new array) same as
+        ## original array
+        n = len(nums)
+        while counter<n:
+            nums[counter]= 0
+            counter+=1
+            
+        return nums
+    
+          
+
+nums = [0, 0, 0, 2, 0, 1, 3, 4, 0, 0]
+Solution().moveZeros(nums)
+print(nums)
+# [2, 1, 3, 4, 0, 0, 0, 0, 0, 0]
