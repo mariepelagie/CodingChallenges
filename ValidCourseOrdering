@@ -1,0 +1,39 @@
+## Prompt: You are given a hash table where the key is a course code, and the value is a list of all the course codes that are prerequisites for the key. 
+## Return a valid ordering in which we can complete the courses. If no such ordering exists, return NULL.
+
+## Plan: 
+## Create list of all keys. for each key check prereqs. if empty, add to courses to take. 
+## if prereqs not empty and all prereqs found in courses list then add this course too.
+## remove added course in both case from list all keys. repeat until list of keys is empty
+
+## Implementation
+def courses_to_take(course_to_prereqs):
+    ## create list of course options
+    course_options = list(course_to_prereqs.keys())
+    course_order = []
+    while len(course_options) >0:
+        for course in course_options:
+            prereqs = course_to_prereqs[course]
+            ## if no prereqs, add to courses to take in any order
+            if len(prereqs) == 0:
+                course_order.append(course)
+                course_options.remove(course)
+            else:
+                ## chack if prereqs in course order
+                check = ','.join(map(str, prereqs)) in ','.join(map(str,course_order ))
+                if check:
+                    course_order.append(course)
+                    course_options.remove(course)
+                    
+    return course_order            
+          
+          
+  
+## Test
+courses = {
+  'CSC300': ['CSC100', 'CSC200'], 
+  'CSC200': ['CSC100'], 
+  'CSC100': []
+}
+print(courses_to_take(courses))
+# ['CSC100', 'CSC200', 'CSC300']
