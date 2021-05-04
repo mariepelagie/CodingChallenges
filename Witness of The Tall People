@@ -1,0 +1,26 @@
+## Prompt: There are n people lined up, and each have a height represented as an integer. 
+## A murder has happened right in front of them, and only people who are taller than everyone 
+## in front of them are able to see what has happened. How many witnesses are there?
+
+## plan:
+## start at end of the list and check if previous item is greater than current
+## item. append counter and shift to the left
+
+## Implementation
+def witnesses(heights):
+    ## define end index
+    k = len(heights)-1
+    ## set counter =1 to include last element that had no obstruction
+    counter = 1
+    ## traverse thru list right to left
+    while k>0:
+        ## cheak if current person is shorter person behind and update counter
+        current = heights[k]
+        if current < heights[k-1]:
+            counter+=1
+        k-=1
+    return counter
+
+## Test
+print(witnesses([3, 6, 3, 4, 1]))
+# 3
