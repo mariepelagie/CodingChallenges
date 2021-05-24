@@ -1,0 +1,30 @@
+''' 
+Given a sorted array, A, with possibly duplicated elements, find the indices of the first and last occurrences of a target element, x. Return -1 if the target is not found.
+'''
+
+## plan: create first and last array index variables. set to to -1.   run thruogh list and update both indices. overwrite last index until end of list. if at least one of the variables is -1 then return -1 else return firts and last index
+
+class Solution: 
+  def getRange(self, arr, target):
+    # create variable for first and last index
+    first_index = -1
+    last_index = -1
+    first = 0
+    for ii in range(len(arr)):
+        if (arr[ii] == target) and first == 0:
+            first_index = ii
+            first +=1
+        elif (arr[ii] == target) and first >=1:
+            last_index = ii
+            first +=1
+    # print(first_index, last_index )
+    if  first_index == -1  or last_index == -1:
+        return -1
+    return [first_index, last_index] 
+            
+  
+# Test program 
+arr = [1, 2, 2, 2, 2, 3, 4, 7, 8, 8] 
+x = 2
+print(Solution().getRange(arr, x))
+# [1, 4]
