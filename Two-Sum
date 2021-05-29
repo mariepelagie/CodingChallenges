@@ -1,0 +1,35 @@
+'''
+
+You are given a list of numbers, and a target number k. Return whether or not there are two numbers in the list that add up to k.
+'''
+
+# Plan 1: loop through list. for each item, loop thru remaining items and check if sum == k . return tru. else return false
+def two_sum_1(list, k):
+    for jj in range(len(list)):
+        ## remove element of interest from list copy
+        temp = list.copy()
+        temp.remove(list[jj])
+        for ii in range(len(temp)):
+            if list[jj] + temp[ii] == k:
+                return True
+    return False
+# plan 2: put numbers in dict as keys and k-number as value. loop through dict to check if values is found in list of number(if so return tru. else return false)
+
+def two_sum_2(list, k):
+    # create dict
+    difference ={}
+    ## Loop thru to create item, difference pair in dictionary
+    for item in list:
+        difference[item] = k-item
+    # check if any of the values found in list.
+    for key in difference:
+        if key in list:
+            return True
+    return True
+
+## Test    
+print(two_sum_1([4,7,1,-3,2], 5))
+# True
+
+print(two_sum_2([4,7,1,-3,2], 5))
+# True
